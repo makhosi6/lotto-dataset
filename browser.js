@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
-const vars = require('./store/storeVars');
+const vars = require('./storeVars');
 //
 (async function() {
     const browser = await puppeteer.launch({
         args: vars.argsArr,
         defaultViewport: null,
-        // headless: vars.bool,
+        headless: vars.bool,
         // executablePath: vars.exPath
     });
     console.log({
