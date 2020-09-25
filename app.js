@@ -4,8 +4,8 @@ const wsChromeEndpointurl = require("./browser");
 const cors = require("cors");
 require("dotenv").config();
 //
+console.log("wsChromeEndpointurl :", wsChromeEndpointurl);
 setTimeout(() => {
-  console.log("wsChromeEndpointurl :", wsChromeEndpointurl);
   const pb = require("./powerball");
   //middleware
   const app = express();
@@ -16,7 +16,7 @@ setTimeout(() => {
   //9090/api/v1/powerball"
   app.use("/api/v1/", Routa);
   const env = process.env.NODE_ENV;
-  const PORT = process.env.PORT;
+  const PORT = process.env.PORT || 9090;
   //Fiv nat-geo uri
   app.listen(
     PORT,

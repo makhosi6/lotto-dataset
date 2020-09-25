@@ -4,12 +4,13 @@ const wsChromeEndpointurl = require("./browser");
 
 class Scrapper {
     constructor(uri) {
-        this.uri = uri;
+        this.uri = uri
+        this.data = []
     }
 
     async lotto() {
         try {
-            let data = [];
+     
             /*
                   REFACTOR, USE SETTERS....
                   */
@@ -30,6 +31,12 @@ class Scrapper {
             const items = await page.$$(
                 "#powerball-results > div.block > div.box > div > div.tableBody > div.tableRow "
             );
+// from
+            let selector = 'input[name="username"]';
+            await page.evaluate((selector) => document.querySelector(selector).click(), selector); 
+// to
+            let selector = 'input[name="username"]';
+            await page.evaluate((selector) => document.querySelector(selector).click(), selector); 
 
             for (const item of items) {
                 try {
@@ -44,29 +51,21 @@ class Scrapper {
                     );
                     const bonus = await item.$eval(
                         ".col4 > .dataVal1 > .resultBalls > .ballsList.powerballExtra > .ball > .shape > span",
-                        (span) => span.innerText
+                        (span) => Number(span.innerText)
                     );
 
                     const numbers = await item.$$(
                         ".col4 > .dataVal1 > .resultBalls > .ballsList.powerball > .ball"
                     );
-                   
-
                     let winning_numbers = [];
-                  
-
                     for (const num of numbers) {
                         try {
-                            const one_num = await num.$eval("div.shape > span", span => span.innerText);
-
+                            const one_num = await num.$eval("div.shape > span", span => Number(span.innerText));
                             winning_numbers.push(one_num);
-
-
-
                         } catch (error) {
                             console.log(
                                 "\x1b[42m%s\x1b[0m",
-                                `From ${uri} numbers loop: ${error.name}`
+                                `From ${this.uri} numbers loop: ${error.name}`
                             );
                         }
                     }
@@ -79,7 +78,7 @@ class Scrapper {
 
 
                     })
-                    data.push({
+                    this.data.push({
                         draw_name,
                         draw_date,
                         game_type,
@@ -94,7 +93,7 @@ class Scrapper {
             //
             await page.close();
             console.log("\x1b[43m%s\x1b[0m", `Done: ${this.uri}`);
-            return data;
+            return this.data;
         } catch (error) {
             console.log("\x1b[41m%s\x1b[0m", `From ${this.uri} Main: ${error}`);
         }
