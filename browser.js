@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const vars = require('./storeVars');
+const vars = require('./store/storeVars');
 //
 (async function() {
     const browser = await puppeteer.launch({

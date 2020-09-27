@@ -6,16 +6,17 @@ require("dotenv").config();
 //
 console.log("wsChromeEndpointurl :", wsChromeEndpointurl);
 setTimeout(() => {
-  const pb = require("./powerball");
+  const pb = require("./routes/powerball");
+  const pbp = require("./routes/powerballplus");
   //middleware
   const app = express();
   app.use(cors());
   app.use(bodyParser.json());
   //
-  let Routa = [pb];
-  //9090/api/v1/powerball"
+  let Routa = [pb, pbp];
+  //   9090/api/v1/powerball"
   app.use("/api/v1/", Routa);
-  const env = process.env.NODE_ENV;
+  const env = process.env.NODE_ENV || "development";
   const PORT = process.env.PORT || 9090;
   //Fiv nat-geo uri
   app.listen(
