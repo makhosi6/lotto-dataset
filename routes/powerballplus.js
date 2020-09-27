@@ -9,7 +9,9 @@ powerball.lotto();
 
 Routa.get('/powerball-plus', (req, res) => {
     res.send({
-        "97ENMdCE": powerball.data
+        "type": "POWERBALL PLUS",
+        source,
+        "data": powerball.data
     });
 });
 
