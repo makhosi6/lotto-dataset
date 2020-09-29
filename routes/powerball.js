@@ -43,6 +43,7 @@ const powerball = new Puppet(source);
 
 powerball.lotto().then(() => {
 csvWriter.writeRecords(powerball.record)
+
     .then(() => {
         console.log('.csv file created from powerball.js');
     });
