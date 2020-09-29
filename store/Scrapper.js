@@ -30,7 +30,7 @@ class Scrapper {
       let nxt = {};
       await page.evaluate((_) => {
         // this will be executed within the page, that was loaded before
-        document.querySelector('input[name="fromDate"]').value = "17/06/2015"; //date sort by js
+        document.querySelector('input[name="fromDate"]').value = "17/06/2017"; //date sort by js
         document.querySelector('input[name="toDate"]').value = "29/09/2020";
       });
       //click
