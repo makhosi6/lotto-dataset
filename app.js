@@ -7,7 +7,7 @@ require("dotenv").config();
 console.log("wsChromeEndpointurl :", wsChromeEndpointurl);
 setTimeout(() => {
   const pb = require("./routes/powerball");
-  const pbp = require("./routes/powerballplus");
+  const pbp = require("./routes/powerball_plus");
   //middleware
   const app = express();
   app.use(cors());
